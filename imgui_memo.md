@@ -101,3 +101,38 @@ void CreateGlContext(HWND &_Hwnd,HDC &_HDC,HGLRC &_Hglrc)
     wglMakeCurrent(_HDC, _Hglrc);       
 }
 ```
+## GUI
+* window作成
+
+引数のサイズでサイズを変える
+
+```
+void my_gui::main_window(bool *pShow,float x,float y)
+{
+    ImGuiWindowFlags window_flags = 0;
+
+    // ウィンドウのサイズ
+    if(!ImGui::Begin("てすと", pShow, ImGuiWindowFlags_NoTitleBar| ImGuiWindowFlags_NoMove))
+    {
+        ImGui::End();
+        return;
+    }
+	ImVec2 Size;
+	ImVec2 Pos = {0,0};
+	Size.x = x;
+	Size.y = y;
+	ImGui::SetWindowSize(Size);
+	ImGui::SetWindowPos(Pos);
+	// 
+	ImGui::Text("ABCD");
+	ImGui::SameLine(0,-5);
+	ImGui::Text("EFGH");
+	static char In[32];
+	ImGui::InputText("123", In, sizeof(In));
+	ImGui::SameLine(0,-5);
+    Size.x = 100;
+    Size.y = 30;
+    ImGui::Button(u8"送信",Size);
+	ImGui::End();
+}
+```
